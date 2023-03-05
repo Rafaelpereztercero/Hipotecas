@@ -24,4 +24,4 @@ foreign key(userId ) REFERENCES Users(userId ) ON DELETE SET NULL # FOREIGN KEY
 
 )
 
-INSERT INTO Users VALUES (0,'Tomas', 'admin',null);
+INSERT INTO Users VALUES (0,'Juan', 'admin',null);
