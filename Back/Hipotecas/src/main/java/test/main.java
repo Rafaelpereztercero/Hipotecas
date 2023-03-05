@@ -3,6 +3,7 @@ package test;
 import java.sql.SQLException;
 
 import models.Simulation;
+import models.User;
 import services.user.UserService;
 import sql.DbFunctions;
 
@@ -11,7 +12,8 @@ public class main {
 	{  
 		UserService us = new UserService();
 		Simulation sm = new Simulation();
-		var t =  DbFunctions.Select("select * from users", new Object[] { } );
-		System.out.println(sm.ToJson(1));
+		String userData;
+	
+		System.out.println(userData);
 	}
 }

@@ -13,14 +13,14 @@ public class User  {
 	private String tempToken;
 
 	/**
-	 * Constructor vacio
+	 * Empty
 	 */
 	public User() {
 
 	}
 	
 	/**
-	 * Constructor completo
+	 * Full
 	 * @param id
 	 * @param username
 	 * @param password
@@ -36,7 +36,7 @@ public class User  {
 	}
 	
 	/**
-	 * Funcion para convertir el valor de los atributos a Json para pasar al frontend el usuario
+	 * Parse values to Json
 	 * @return
 	 */
 	public String toJson() {

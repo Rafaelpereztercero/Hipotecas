@@ -20,14 +20,14 @@ public class Simulation {
 	
 	
 	/**
-	 * Constructor vacio
+	 * Empty
 	 */
 	public Simulation() {
 		
 	}
 	
 	/**
-	 * Constructor completo
+	 * Full
 	 * @param id
 	 * @param userId
 	 * @param creationDate
@@ -46,10 +46,10 @@ public class Simulation {
 	}
 	
 	/**
-	 * Funcion para convertir el valor de los atributos a Json para pasar al frontend el usuario
+	 * Parse values to Json
 	 * @return
 	 */
-	public String ToJson(int userId) throws SQLException {
+	public static String ToJson(int userId) throws SQLException {
 
 		// DECLARAMOS LA ESTRUCTURA DE INICIO
 		String estructuraInicio = "\n\"Transactions\": [";
@@ -66,14 +66,14 @@ public class Simulation {
 			transactions += "\"creationDate\": \"" + transaction.getString("creationDate") + "\",\n";
 			transactions += "\"initial\": \"" + transaction.getFloat("initial") + "\",\n";
 			transactions += "\"duration\": \"" + transaction.getString("duration") + "\",\n";
-			transactions += "\"fee\": \"" + transaction.getFloat("fee") + "\",\n";
+			transactions += "\"fee\": \"" + transaction.getFloat("fee") + "\"\n";
 			transactions += "},\n";
 		}
 		if (transactions.equals("")) {
 			return "";
 		}
 		transactions = transactions.substring(0, transactions.length() - 2);
-		transactions += "],\n";
+		transactions += "]\n";
 
 		// CONCATENAMOS LOS STRINGS
 		String complete = estructuraInicio + transactions;

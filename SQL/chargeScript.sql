@@ -1,10 +1,27 @@
+drop database if exists hipotecas;
 
 Create database if not exists hipotecas;
+
 use hipotecas;
+
 Create table if not exists  Users ( 
-id int(16) auto_increment, 
+userId int NOT NULL AUTO_INCREMENT,
 username varchar(20),
 password varchar(20),
-PRIMARY KEY (id)
+tempToken varchar(40),
+PRIMARY KEY (userId)
+);
+
+Create table if not exists Simulation (
+Id int NOT NULL AUTO_INCREMENT,
+userId int,
+creationDate varchar(100),
+initial float,
+duration varchar(70),
+fee float,
+PRIMARY KEY (Id),
+foreign key(userId ) REFERENCES Users(userId ) ON DELETE SET NULL # FOREIGN KEY
+
 )
-drop database if exists hipotecas;
+
+INSERT INTO Users VALUES (0,'Tomas', 'admin',null);

@@ -113,6 +113,25 @@ public class UserService {
 				return 0;
 			}
 		}
+	/**
+	 * Get a user by token
+	 * @param token
+	 * @return
+	 * @throws SQLException
+	 */
+	public User getUserByToken(String token) throws SQLException {
 
+		String queryUser = "select * from users where tempToken = ? ";
+		ResultSet userRs = DbFunctions.Select(queryUser, new Object[] { token });
+
+		if (userRs.next() == false) {
+			return null;
+		}
+
+		User ur = new User(userRs.getInt("userId"),userRs.getString("username"),userRs.getString("password"),userRs.getString("tempToken"));
+
+		return ur;
+
+	}
 	
 }

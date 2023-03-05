@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,46 +8,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Simulation;
+import models.User;
 import services.user.UserService;
 
+
+
 /**
- * Servlet implementation class LoginSv
+ * Servlet implementation class loadView
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/loadView")
+public class SendUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-
-		String cookies = "";
-
 		UserService us = new UserService();
-
+		String token = request.getParameter("token");
+		String userData = "";
+		
 		try {
-			
-			int good = us.login(username, password);
-
-			if (good == 1) {
-				cookies = us.getCookies(username);
-
-			} else {
-				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				cookies = "Username or password not matching";
-			}
-
-		} catch (SQLException e) {
-
+			User ur = us.getUserByToken(token);
+			String userJson = ur.toJson();
+			String simulationsJson = Simulation.ToJson(ur.getId());
+			userData = userJson + simulationsJson + "}";  ;
+		} catch (Exception e) {
 			System.out.println(e);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
+			userData = "please login again";
 		}
 
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.getWriter().append(cookies);
+		response.getWriter().append(userData);
 	}
-
 }
