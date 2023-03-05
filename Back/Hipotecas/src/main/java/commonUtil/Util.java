@@ -31,9 +31,6 @@ public class Util {
 
 		} catch (Exception e) {
 
-			// INFORMAMOS DEL ERROR
-			System.out.println(e);
-
 			// DEVOLVEMOS EL STRING OTP2
 			return otp2;
 

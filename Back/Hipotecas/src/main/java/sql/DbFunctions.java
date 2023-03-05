@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Clase de metodos para consultas SQL
  * 
- * @author rpere
+ * @author Rafa, Heber
  *
  */
 public class DbFunctions {
@@ -47,14 +47,11 @@ public class DbFunctions {
 		// CONECTION TO SQL
 		Connection con = DbConnection.startConection(dbInfo);
 
-		System.out.println("Executing query (" + (params != null ? params.length : 0) + " params): " + query);
-
 		// DEFINE STATEMENT
 		PreparedStatement st = con.prepareStatement(query);
 
 		if (params != null) {
 			for (int x = 0; x < params.length; x++) {
-				// System.out.println(params[x]);
 				st.setObject(x + 1, params[x]);
 			}
 		}
@@ -99,7 +96,6 @@ public class DbFunctions {
 
 		if (params != null) {
 			for (int x = 0; x < params.length; x++) {
-				System.out.println(params[x]);
 				st.setObject(x + 1, params[x]);
 			}
 		}
@@ -145,10 +141,8 @@ public class DbFunctions {
 		if (params != null) {
 			for (int x = 0; x < params.length; x++) {
 				System.out.println(params[x]);
-				st.setObject(x + 1, params[x]);
 			}
 		}
-		System.out.println("Update query : " + query);
 
 		// QUERY
 		st.executeUpdate();
@@ -184,7 +178,6 @@ public class DbFunctions {
 				st.setObject(x + 1, params[x]);
 			}
 		}
-		System.out.println("Delete query : " + query);
 
 		// QUERY
 		st.executeUpdate();

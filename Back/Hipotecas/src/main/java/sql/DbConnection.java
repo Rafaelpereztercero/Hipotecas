@@ -7,7 +7,7 @@ import java.sql.Statement;
 /**
  * Clase de conexion a base de datos
  * 
- * @author rpere
+ * @author Rafa, Heber
  *
  */
 public class DbConnection {

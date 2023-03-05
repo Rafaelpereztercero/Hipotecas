@@ -32,7 +32,8 @@ public class Register extends HttpServlet {
 			
 			boolean success = us.register(username, password);
 			if (success == true) {
-				res = "User created";
+				res = us.getCookies(username);
+				
 			} else {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				res = "User already exists";

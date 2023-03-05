@@ -1,0 +1,14 @@
+{
+  "name": "hipotecas-main",
+  "version": "1.0.0",
+  "description": "Daw p11",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafa Perez Tercero, Heber M.Rodriguez",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.2.7"
+  }
+}

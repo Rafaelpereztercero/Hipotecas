@@ -45,11 +45,11 @@ public class UserService {
 			// SI NO SE ENCUNETRAN RESULTADOS
 		} else {
 
-		
+			String token = Util.genreRandomString();
 			// INSERTAMOS EL USUARIO
 			String insertQuery = "0, ?, ?, ?";
 			DbFunctions.Insert("users", insertQuery,
-					new Object[] {username, password });
+					new Object[] {username, password, token });
 
 			// DEVOLVEMOS 1 PARA INDICAR QUE LA OPERACIÓN SE HA REALIZADO CON ÉXITO
 			return true;

@@ -20,9 +20,14 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+		System.out.println("IT WORKS");
+		System.out.println("IT WORKS");
+		System.out.println("IT WORKS");
+		System.out.println("IT WORKS");
+		System.out.println("IT WORKS");
+		
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String username = request.getParameter("user");
 
 		String cookies = "";
 
@@ -34,7 +39,6 @@ public class Login extends HttpServlet {
 
 			if (good == 1) {
 				cookies = us.getCookies(username);
-				System.out.println("Login Cookies : " + cookies);
 
 			} else {
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

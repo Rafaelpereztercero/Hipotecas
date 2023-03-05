@@ -1,6 +1,4 @@
-/sql/
-/models/
-/services/
-/commonUtil/
 /servlets/
-/test/
+/services/
+/sql/
+/commonUtil/
