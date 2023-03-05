@@ -32,6 +32,7 @@ cuadro de amortización.
 Para calcular la cuota mensual, hemos empleado la siguiente funcion:
 
 function calcularCuotaMensualTabla(monto, tasaInteres, plazo) {
+    
         / Calcular la tasa de interés mensual
         var tasaInteresMensual = tasaInteres / 12;
       
