@@ -1,10 +1,11 @@
-const user = document.getElementById("usernameInput").value;
-const password = document.getElementById("password").innerHTML;
+
 
 import { crear } from "../../assets/common/cookies.js";
 // LOGIN FUNCTION
 function login() {
-    
+    const user = document.getElementById("usernameInput").value
+    const password = document.getElementById("password").value
+  
     var sxmlhttp;
     sxmlhttp = new XMLHttpRequest();
 
@@ -27,9 +28,10 @@ function login() {
    
     sxmlhttp.open("POST", "http://127.0.0.1:8080/Hipotecas/Login", true);
     sxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    sxmlhttp.send("password="+"passs"+"&&username="+"user");
+    sxmlhttp.send("password="+password+"&&username="+user);
 }
 window.onload = function() {
+    
     document.getElementById("send").addEventListener("click",function() {
         login()
     })

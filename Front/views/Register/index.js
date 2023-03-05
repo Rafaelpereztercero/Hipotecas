@@ -1,10 +1,9 @@
-const passs = document.getElementById('password').value;
-const user = document.getElementById('username').value;
-
 import { crear } from "../../assets/common/cookies.js";
 
 // REGISTER FUNCTION
 function register(){
+    const user = document.getElementById("usernameInput").value
+    const password = document.getElementById("password").value
     var sxmlhttp;
     sxmlhttp=new XMLHttpRequest();
 
@@ -16,13 +15,9 @@ function register(){
         }
     }
 
- 
-
-
     sxmlhttp.open("POST","http://127.0.0.1:8080/Hipotecas/Register",true);
     sxmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     sxmlhttp.send("password="+"passs"+"&&username="+"user");
-
     
 } 
 
