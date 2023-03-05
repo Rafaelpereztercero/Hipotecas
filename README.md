@@ -7,12 +7,12 @@ README).
 o Una WAR con el código fuente de la aplicación. Debe ser
 compilable con un Tomcat 10.1
 
-## ** El archivo .war se encuentra dentro de la carpeta "WAR" **
+## **El archivo .war se encuentra dentro de la carpeta "WAR"**
 
 o Un script SQL con la creación de la base de datos (tablas, etc), un
 usuario con el que conecta la aplicación a la base de datos.
 
-## ** El archivo de carga se encuentra dentro de la carpeta "SQL" **
+## **El archivo de carga se encuentra dentro de la carpeta "SQL"**
 
 BONUS (2P)
 
