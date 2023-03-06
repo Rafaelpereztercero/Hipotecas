@@ -64,6 +64,7 @@ function calcularCuotaMensualTabla(monto, tasaInteres, plazoMeses) {
   }
   
 window.onload = async function () {
+  if (document.cookie != "") {
   const cookie = document.cookie.substring(15, document.cookie.length);
   user = JSON.parse(await getJson(cookie));
 
@@ -119,6 +120,7 @@ window.onload = async function () {
         </div>
         `;
   }
+  
   for (let i = 0; i < user.Simulations.length; i++) {
     document
       .getElementById("simulation" + i)
@@ -148,6 +150,11 @@ window.onload = async function () {
         document.getElementById("show").innerHTML= ""
       });
   }
+}
+else {
+    document.getElementById("concepts").classList.remove("mt-[40rem]");
+    document.getElementById("concepts").classList.add("mt-[11rem]");
+}
 
   document
     .getElementById("showAllTable")
@@ -161,7 +168,6 @@ window.onload = async function () {
       tasaInteres = parseFloat(tasaInteres);
       plazo = parseInt(plazo);
 
-      document.getElementById("");
 
       let start = `<thead>
         <tr class="text-sm border border-l-slate-900 py-1">
