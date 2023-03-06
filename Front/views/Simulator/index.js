@@ -105,7 +105,12 @@ document.getElementById("simulationBttn").addEventListener("click",function() {
     document.getElementById("cap").innerHTML = monto + " €";
     document.getElementById("int").innerHTML = tasaInteres + " %";
     document.getElementById("dur").innerHTML = plazo + " meses";
+    
+    monto = parseFloat(monto);
+    tasaInteres = parseFloat(tasaInteres);
+    plazo = parseInt(plazo);
 
+    calcularCuotaMensualTabla(monto, tasaInteres, plazo)
   
 
     document.getElementById("showAllTable").addEventListener("click",function() {
