@@ -31,44 +31,38 @@ cuadro de amortización.
 
 Para calcular la cuota mensual, hemos empleado la siguiente funcion:
 
-function calcularCuotaMensualTabla(monto, tasaInteres, plazo) {
-
-        / Calcular la tasa de interés mensual
-        var tasaInteresMensual = tasaInteres / 12;
-      
-        / Calcular la cuota mensual utilizando la fórmula de la cuota constante
-        var cuotaMensual = monto * (tasaInteresMensual * Math.pow(1 + tasaInteresMensual, plazo)) / (Math.pow(1 + tasaInteresMensual, plazo) - 1);
-      
-        / Inicializar variables para los detalles de amortización
-        var capitalPendiente = monto;
-        var amortizacion = 0;
-        var interes = 0;
-        var capitalPendientePosterior = 0;
-      
-        / Crear una tabla para los detalles de amortización
-        var tablaAmortizacion = "<table><tr><th>Mes</th><th>Capital pendiente anterior</th><th>Cuota a pagar</th><th>Parte de la cuota que es amortización</th><th>Parte de la cuota que es interés</th><th>Capital pendiente posterior</th></tr>";
+function calcularCuotaMensualTabla(monto, tasaInteres, plazoMeses) {
+    // Convertir tasa de interés de porcentaje a decimal
+    tasaInteres = tasaInteres / 100;
+  
+    // Calcular cuota mensual
+    var cuotaMensual = (monto * tasaInteres) / (1 - Math.pow(1 + tasaInteres, -plazoMeses));
     
-        / Calcular los detalles de amortización para cada mes
-        for (var mes = 1; mes <= plazo; mes++) {
-          / Calcular el interés del mes
-          interes = capitalPendiente * tasaInteresMensual;
-      
-          / Calcular la amortización del mes
-          amortizacion = cuotaMensual - interes;
-      
-          / Calcular el capital pendiente posterior del mes
-          capitalPendientePosterior = capitalPendiente - amortizacion;
-      
-          / Agregar los detalles de amortización a la tabla
-          tablaAmortizacion += "<tr><td>" + mes + "</td><td>" + capitalPendiente.toFixed(2) + "</td><td>" + cuotaMensual.toFixed(2) + "</td><td>" + amortizacion.toFixed(2) + "</td><td>" + interes.toFixed(2) + "</td><td>" + capitalPendientePosterior.toFixed(2) + "</td></tr>";
+    // Crear tabla HTML
+    var tabla = "";
     
-          / Actualizar el capital pendiente para el próximo mes
-          capitalPendiente = capitalPendientePosterior;
-        }
+    var saldoPendiente = monto;
+    var interesesTotal = 0;
+    
+    for (var i = 1; i <= plazoMeses; i++) {
+      // Calcular intereses y amortización
+      var intereses = saldoPendiente * tasaInteres;
+      var amortizacion = cuotaMensual - intereses;
       
-        / Cerrar la tabla
-        tablaAmortizacion += "</table>";
+      // Actualizar saldo pendiente y total de intereses
+      saldoPendiente -= amortizacion;
+      interesesTotal += intereses;
       
-        / Devolver la tabla de amortización
-        return tablaAmortizacion
-      }
+      // Agregar fila a la tabla
+      tabla += "<tr class='border'><td>" + i + "</td><td>" + saldoPendiente.toFixed(2) + " €</td><td>" + amortizacion.toFixed(2) + " €</td><td>" + intereses.toFixed(2) + " €</td><td>" + cuotaMensual.toFixed(2) + " €</td></tr>";
+    }
+    
+    // Agregar fila con totales
+    tabla += "<tr class='border-[2px] border-[solid] border-[black]'><td>Total</td><td></td><td>" + (monto - saldoPendiente).toFixed(2) + " €</td><td>" + interesesTotal.toFixed(2) + " €</td><td>" + (cuotaMensual * plazoMeses).toFixed(2) + " €</td></tr>";
+    
+    // Cerrar tabla HTML
+    tabla += "";
+    
+    // Retornar tabla generada
+    return tabla;
+  }
