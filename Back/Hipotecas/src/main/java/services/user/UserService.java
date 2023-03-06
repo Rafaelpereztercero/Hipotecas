@@ -96,8 +96,6 @@ public class UserService {
 
 			String userCompare = "select username from users where  username = ? and password = ? ";
 			
-			System.out.println(password);
-
 			ResultSet unameRs = DbFunctions.Select(userCompare, new Object[] { username, password});
 		
 

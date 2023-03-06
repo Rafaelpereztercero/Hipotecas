@@ -37,7 +37,6 @@ public class SendUser extends HttpServlet {
 			}
 			userData = userJson + simulationsJson + "}";  ;
 		} catch (Exception e) {
-			System.out.println(e);
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			userData = "please login again";
 		}
