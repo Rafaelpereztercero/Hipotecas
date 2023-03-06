@@ -1,3 +1,4 @@
+simulation.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +53,7 @@
 </head>
 <body>
 
-  <header class="relative w-screen flex flex-row justify-between items-center p-4">
+  <header class="relative w-screen flex flex-row justify-between items-center p-4 lg:px-32 2xl:px-96">
     
     <!-- BARS ICON -->
     <div onclick="toggleAsideMenu('open')" id="barsMenuIcon" class="sm:hidden w-10 h-10">
@@ -67,9 +68,20 @@
       </svg>
     </div>
 
+    <!-- USER PROFILE IMAGE -->
     <div class="w-14 h-14">
       <img src="../../assets/images/default-user-image.png" alt="user-img" class="w-full">
     </div>
+
+    <!-- NAVBAR -->
+    <nav class="xs:hidden sm:block">
+      <ul class="flex flex-row justify-between items-center">
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="#">Inicio</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="../views/Simulator/simulation.html">Simulador de Hipoteca</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="#">Ver mis simulaciones</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="#">Información</a></li>
+      </ul>
+    </nav>
 
     <!-- Aside menu mobile and tablet -->
     <aside id="asideMenu" class="absolute z-40 top-[88px] -left-[100%] w-full flex flex-col pt-8 px-8 items-center bg-slate-100 h-screen transition ease-in-out duration-200">
@@ -95,7 +107,7 @@
             <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <a href="../../src/index.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Inicio</a>
+            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Inicio</a>
           </li>
 
           <!-- SIMULADOR -->
@@ -103,7 +115,7 @@
             <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Simulador de Hipoteca</a>
+            <a href="../views/Simulator/simulation.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Simulador de Hipoteca</a>
           </li>
 
           <!-- VER MIS SIMULACIONES -->
@@ -127,73 +139,59 @@
     </aside>
   </header>
 
-  <main class="mb-20">
-    <section class="relative w-full h-64 flex flex-col justify-center items-center">
-      <img src="../../assets/images/hero-1.jpg" alt="hero-img" class="absolute top-0 brightness-50 -z-10">
-      <h1 class="text-2xl text-slate-100">Simulador de Hipotecas</h1>
-  
-        <div class="absolute top-20 bg-slate-100 p-8 sm:p-12">
+  <main class="relative mb-20">
+    <img src="../../assets/images/hero-1.jpg" alt="hero-img" class="absolute top-0 brightness-50 -z-10">
+
+    <!-- BACKGROUND IMG AND TITLE -->
+    <section class="relative w-full flex flex-col justify-center items-center">
+      <h1 class="text-2xl text-slate-100 mt-16">Simulador de Hipotecas</h1>
+    </section>
+
+    <!-- FORM SIMULATION -->
+    <section class="relative w-full flex flex-col justify-center items-center lg:px-32 2xl:px-80">
+        <div class="absolute top-8 w-[85%] rounded-lg bg-slate-100 p-8 sm:p-12 lg:px-32 2xl:mx-96 2xl:px-12 2xl:w-[40%]">
             <form id="form">
-                <div class="relative z-0 w-full mb-5">
+                <div class="relative z-10 w-full mb-5">
+                    <input
+                        id="importe"
+                        type="text"
+                        name="importe"
+                        placeholder=""
+                        required
+                        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    />
+                    <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Importe de la hipoteca</label>
+                    <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <div class="relative z-10 w-full mb-5">
+                    <input
+                        id="interes"
+                        type="text"
+                        name="interes"
+                        placeholder=" "
+                        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    />
+                    <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Interés (%)</label>
+                    <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <div class="relative z-10 w-full mb-5">
                 <input
+                    id="plazo"
                     type="text"
-                    name="name"
-                    placeholder=" "
-                    required
-                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Enter name</label>
-                <span class="text-sm text-red-600 hidden" id="error">Name is required</span>
-                </div>
-        
-                <div class="relative z-0 w-full mb-5">
-                <input
-                    type="email"
-                    name="email"
+                    name="plazo"
                     placeholder=" "
                     class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Enter email address</label>
-                <span class="text-sm text-red-600 hidden" id="error">Email address is required</span>
+                <label for="password" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Plazo amortización (años)</label>
+                <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
                 </div>
         
-                <div class="relative z-0 w-full mb-5">
-                <input
-                    type="password"
-                    name="password"
-                    placeholder=" "
-                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <label for="password" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Enter password</label>
-                <span class="text-sm text-red-600 hidden" id="error">Password is required</span>
-                </div>
-        
-                <fieldset class="relative z-0 w-full p-px mb-5">
-                <legend class="absolute text-gray-500 transform scale-75 -top-3 origin-0">Choose an option</legend>
-                <div class="block pt-3 pb-2 space-x-4">
-                    <label>
-                    <input
-                        type="radio"
-                        name="radio"
-                        value="1"
-                        class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                    />
-                    Option 1
-                    </label>
-                    <label>
-                    <input
-                        type="radio"
-                        name="radio"
-                        value="2"
-                        class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-                    />
-                    Option 2
-                    </label>
-                </div>
                 <span class="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
                 </fieldset>
         
-                <div class="relative z-0 w-full mb-5">
+                <div class="relative z-10 w-full mb-5">
                 <select
                     name="select"
                     value=""
@@ -201,101 +199,122 @@
                     class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 >
                     <option value="" selected disabled hidden></option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
-                    <option value="4">Option 4</option>
-                    <option value="5">Option 5</option>
+                    <option value="1">Mensual</option>
+                    <option value="2">Trimestral</option>
+                    <option value="3">Cuatrimestral</option>
+                    <option value="4">Semestral</option>
+                    <option value="5">Anual</option>
                 </select>
-                <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Select an option</label>
-                <span class="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
-                </div>
-        
-                <div class="flex flex-row space-x-4">
-                <div class="relative z-0 w-full mb-5">
-                    <input
-                    type="text"
-                    name="date"
-                    placeholder=" "
-                    onclick="this.setAttribute('type', 'date');"
-                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                    />
-                    <label for="date" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Date</label>
-                    <span class="text-sm text-red-600 hidden" id="error">Date is required</span>
-                </div>
-                <div class="relative z-0 w-full">
-                    <input
-                    type="text"
-                    name="time"
-                    placeholder=" "
-                    onclick="this.setAttribute('type', 'time');"
-                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                    />
-                    <label for="time" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Time</label>
-                    <span class="text-sm text-red-600 hidden" id="error">Time is required</span>
-                </div>
-                </div>
-        
-                <div class="relative z-0 w-full mb-5">
-                <input
-                    type="number"
-                    name="money"
-                    placeholder=" "
-                    class="pt-3 pb-2 pl-5 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <div class="absolute top-0 left-0 mt-3 ml-1 text-gray-400">$</div>
-                <label for="money" class="absolute duration-300 top-3 left-5 -z-1 origin-0 text-gray-500">Amount</label>
-                <span class="text-sm text-red-600 hidden" id="error">Amount is required</span>
-                </div>
-        
-                <div class="relative z-0 w-full mb-5">
-                <input
-                    type="text"
-                    name="duration"
-                    placeholder=" "
-                    class="pt-3 pb-2 pr-12 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                />
-                <div class="absolute top-0 right-0 mt-3 mr-4 text-gray-400">min</div>
-                <label for="duration" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Duration</label>
-                <span class="text-sm text-red-600 hidden" id="error">Duration is required</span>
+                <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecciona un periodo de pago</label>
+                <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
                 </div>
         
                 <button
-                id="button"
-                type="button"
-                class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-pink-500 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
+                    id="simulationBttn"
+                    type="button"
+                    class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-indigo-800 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
                 >
-                Toggle Error
+                Calcular
                 </button>
             </form>
         </div>
-  
-  <!-- <script>
-    'use strict'
-  
-    document.getElementById('button').addEventListener('click', toggleError)
-    const errMessages = document.querySelectorAll('#error')
-  
-    function toggleError() {
-      // Show error message
-      errMessages.forEach((el) => {
-        el.classList.toggle('hidden')
-      })
-  
-      // Highlight input and label with red
-      const allBorders = document.querySelectorAll('.border-gray-200')
-      const allTexts = document.querySelectorAll('.text-gray-500')
-      allBorders.forEach((el) => {
-        el.classList.toggle('border-red-600')
-      })
-      allTexts.forEach((el) => {
-        el.classList.toggle('text-red-600')
-      })
-    }
-  </script> -->
     </section>
 
-    <section class="relative w-full pt-28 px-8">
+    <!-- CALCULATION RESULT -->
+    <section class="relative h-fit mt-[120%] ml-8 md:mt-[65%] md:px-20 lg:px-32 lg:ml-0 lg:mt-[58%] 2xl:mt-[35%] 2xl:bg-slate-50 2xl:py-6 2xl:px-80">
+        <h2 class="text-2xl mb-4">Resumen de la hipoteca</h2>
+        <p class="text-base tracking-wide text-indigo-800 font-bold mb-2">CARACTERÍSTICAS</p>
+
+        <!-- CAPITAL INICIAL -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+        </p>
+
+        <!-- INTERÉS -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+        </p>
+
+        <!-- PLAZO -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+          </p>
+
+          <!-- MODALIDAD -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+        </p>
+
+        <!-- TABLE -->
+        <table class="table-auto mb-4 md:w-full">
+            <thead>
+                <tr class="text-sm border border-l-slate-900 py-1">
+                    <th class="border">Pagos</th>
+                    <th class="border">Principal</th>
+                    <th class="border">Cuota</th>
+                    <th class="border">T.Intereses</th>
+                    <th class="border">T.Pagos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">360</td>
+                    <td class="border">270.000 €</td>
+                    <td class="border">997,97 €</td>
+                    <td class="border">89.270,12 €</td>
+                    <td class="border">359.270.12 €</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="showAllTable" class="w-[95%] py-2 px-6 text-sm text-center text-slate-100 rounded-lg bg-indigo-800 mb-4 md:w-full">
+            Ver cuadro de amortización
+        </div>
+
+        <!-- TABLA CUADRO AMORTIZACIÓN -->
+        <table class="table-auto mb-4 md:w-full">
+            <thead>
+                <tr class="text-sm border border-l-slate-900 py-1">
+                    <th class="border">Pago</th>
+                    <th class="border">C.Pendiente</th>
+                    <th class="border">C.Amortizado</th>
+                    <th class="border">Intereses</th>
+                    <th class="border">Cuota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">1</td>
+                    <td class="border">270.000 €</td>
+                    <td class="border">547,97 €</td>
+                    <td class="border">450 €</td>
+                    <td class="border">997,97 €</td>
+                </tr>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">2</td>
+                    <td class="border">269.452,02 €</td>
+                    <td class="border">548,88 €</td>
+                    <td class="border">449.08 €</td>
+                    <td class="border">997,97 €</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section class="relative w-full xs:pt-16 xs:px-8 md:px-20 lg:px-32 2xl:px-80">
       <div>
         <h3 class="text-xl text-indigo-800 font-semibold tracking-wide mb-4">CONCEPTOS CLAVE</h3>
         <p class="text-base text-justify tracking-wide mb-4">
@@ -389,5 +408,6 @@
     <p>Heber M.Rodríguez Cabrera - Rafael Pérez Tercero</p>
     <p>	&#169; 2023</p>
   </footer>
+  <script src="./index.js" type="module"></script>
 </body>
 </html>

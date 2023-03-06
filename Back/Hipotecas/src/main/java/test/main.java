@@ -13,7 +13,13 @@ public class main {
 		UserService us = new UserService();
 		Simulation sm = new Simulation();
 		String userData;
-	
+		User ur = us.getUserByToken("7fac8qAa");
+		String userJson = ur.toJson();
+		String simulationsJson = Simulation.ToJson(ur.getId());
+		if (simulationsJson != "") {
+			userJson += ",";
+		}
+		userData = userJson + simulationsJson + "}"; 
 		System.out.println(userData);
 	}
 }

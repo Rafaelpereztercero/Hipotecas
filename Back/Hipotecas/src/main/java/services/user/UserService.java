@@ -13,7 +13,6 @@ import sql.DbFunctions;
 
 public class UserService {
 
-	// CLEAN METHODS
 
 	/**
 	 * Store a user and set the cookie value
@@ -96,13 +95,15 @@ public class UserService {
 			// MAIL
 
 			String userCompare = "select username from users where  username = ? and password = ? ";
+			
+			System.out.println(password);
 
 			ResultSet unameRs = DbFunctions.Select(userCompare, new Object[] { username, password});
+		
 
 			unameRs.next();
 			if (!(unameRs.getString("username").equalsIgnoreCase(""))) {
 				String token = Util.genreRandomString();
-				
 				String Query = " tempToken = ?  where username = ? ";
 				DbFunctions.Update("users", Query,
 						new Object[] { token, username});

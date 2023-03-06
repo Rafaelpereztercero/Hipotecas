@@ -52,7 +52,7 @@ public class Simulation {
 	public static String ToJson(int userId) throws SQLException {
 
 		// DECLARAMOS LA ESTRUCTURA DE INICIO
-		String estructuraInicio = "\n\"Transactions\": [";
+		String estructuraInicio = "\n\"Simulations\": [";
 
 		String transactions = "";
 

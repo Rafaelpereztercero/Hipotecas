@@ -45,7 +45,7 @@ public class User  {
 		content += "\"id\": \"" + this.getId() + "\",\n";
 		content += "\"username\": \"" + this.getUsername() + "\",\n";
 		content += "\"password\": \"" + this.getPassword() + "\",\n";
-		content += "\"tempToken\": \"" + this.getTempToken() + "\",\n";
+		content += "\"tempToken\": \"" + this.getTempToken() + "\" \n";
 
 		return content;
 	}

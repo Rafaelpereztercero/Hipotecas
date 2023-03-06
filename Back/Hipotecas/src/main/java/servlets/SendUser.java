@@ -17,7 +17,7 @@ import services.user.UserService;
 /**
  * Servlet implementation class loadView
  */
-@WebServlet("/loadView")
+@WebServlet("/SendUser")
 public class SendUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +32,9 @@ public class SendUser extends HttpServlet {
 			User ur = us.getUserByToken(token);
 			String userJson = ur.toJson();
 			String simulationsJson = Simulation.ToJson(ur.getId());
+			if (simulationsJson != "") {
+				userJson += ",";
+			}
 			userData = userJson + simulationsJson + "}";  ;
 		} catch (Exception e) {
 			System.out.println(e);

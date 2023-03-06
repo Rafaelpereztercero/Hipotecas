@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Clase de metodos para consultas SQL
  * 
- * @author Rafa, Heber
+ * @author rpere
  *
  */
 public class DbFunctions {
@@ -141,6 +141,7 @@ public class DbFunctions {
 		if (params != null) {
 			for (int x = 0; x < params.length; x++) {
 				System.out.println(params[x]);
+				st.setObject(x + 1, params[x]);
 			}
 		}
 

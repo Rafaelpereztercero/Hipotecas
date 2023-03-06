@@ -12,3 +12,4 @@ export function eliminar(){
     window.location.reload();
 
 }
+

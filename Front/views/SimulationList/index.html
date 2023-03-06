@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rafa Perez Tercero, Heber M.Rodríguez">
+
+    <link rel="stylesheet" href="../../dist/style.css">
+
+    <script src="../../src/main.js"></script>
+    <script src="./index.js"></script>
+
+    <!-- FORM LABEL STYLES -->
+    <style>
+        .-z-1 {
+        z-index: -1;
+        }
+    
+        .origin-0 {
+        transform-origin: 0%;
+        }
+    
+        input:focus ~ label,
+        input:not(:placeholder-shown) ~ label,
+        textarea:focus ~ label,
+        textarea:not(:placeholder-shown) ~ label,
+        select:focus ~ label,
+        select:not([value='']):valid ~ label {
+        /* @apply transform; scale-75; -translate-y-6; */
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate))
+            skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+        --tw-scale-x: 0.75;
+        --tw-scale-y: 0.75;
+        --tw-translate-y: -1.5rem;
+        }
+    
+        input:focus ~ label,
+        select:focus ~ label {
+        /* @apply text-black; left-0; */
+        --tw-text-opacity: 1;
+        color: rgba(0, 0, 0, var(--tw-text-opacity));
+        left: 0px;
+        }
+    </style>
+
+    <title>AppHipotecas - Lista</title>
+</head>
+<body>
+
+  <header class="relative w-screen flex flex-row justify-between items-center p-4 lg:px-32 2xl:px-96">
+    
+    <!-- BARS ICON -->
+    <div onclick="toggleAsideMenu('open')" id="barsMenuIcon" class="sm:hidden w-10 h-10">
+      <svg class="sm:hidden w-full h-full" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <!-- X ICON -->
+    <div onclick="toggleAsideMenu('close')" id="closeMenuIcon" class="xs:hidden sm:hidden w-10 h-10">
+      <svg class="sm:hidden w-full h-full" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <!-- USER PROFILE IMAGE -->
+    <div class="w-14 h-14">
+      <img src="../../assets/images/default-user-image.png" alt="user-img" class="w-full">
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="xs:hidden sm:block">
+      <ul class="flex flex-row justify-between items-center">
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="../../src/index.html">Inicio</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="../Simulator/simulation.html">Simulador de Hipoteca</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="#">Ver mis simulaciones</a></li>
+        <li class="pr-4 text-slate-900 font-semibold tracking-wide cursor-pointer hover:text-indigo-800"><a href="#">Información</a></li>
+      </ul>
+    </nav>
+
+    <!-- Aside menu mobile and tablet -->
+    <aside id="asideMenu" class="absolute z-40 top-[88px] -left-[100%] w-full flex flex-col pt-8 px-8 items-center bg-slate-100 h-screen transition ease-in-out duration-200">
+
+      <h1 class="mb-6 text-xl text-slate-900 font-bold tracking-wider">SIMULADOR DE HIPOTECAS</h1>
+      
+      <div class="flex flex-col">
+        <!-- LOGIN BTTN -->
+        <a href="../views/Login/login.html" class="w-72 py-3 px-6 mb-6 border-2 border-indigo-800 rounded-lg text-lg font-bold tracking-wider text-indigo-800 active:bg-indigo-800 active:text-slate-100 transition ease-in duration-100">
+          Login
+        </a>
+        <!-- REGISTER BTTN -->
+        <a href="../views/Register/register.html" class="w-72 py-3 px-6 mb-14 border-2 border-indigo-800 bg-indigo-800 rounded-lg text-lg text-slate-100 font-bold tracking-wider active:bg-transparent active:text-indigo-800 transition ease-in duration-100">
+          Register
+        </a>
+      </div>
+
+      <div class="w-72">
+        <ul class="flex flex-col justify-between h-[260px] text-lg font-bold tracking-wider">
+
+          <!-- INICIO -->
+          <li class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Inicio</a>
+          </li>
+
+          <!-- SIMULADOR -->
+          <li class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <a href="../views/Simulator/simulation.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Simulador de Hipoteca</a>
+          </li>
+
+          <!-- VER MIS SIMULACIONES -->
+          <li class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Ver mis simulaciones</a>
+          </li>
+
+          <!-- INFORMACIÓN -->
+          <li class="flex items-center">
+            <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Información</a>
+          </li>
+          
+        </ul>
+      </div>
+    </aside>
+  </header>
+
+  <main class="relative mb-20">
+    <img src="../../assets/images/hero-1.jpg" alt="hero-img" class="absolute top-0 brightness-50 -z-10">
+
+    <!-- BACKGROUND IMG AND TITLE -->
+    <section class="relative w-full flex flex-col justify-center items-center mb-12">
+      <h1 class="text-2xl text-slate-100 mt-16">Listado de simulaciones</h1>
+    </section>
+
+    <!-- FORM SIMULATION
+    <section class="relative w-full flex flex-col justify-center items-center lg:px-32 2xl:px-80">
+        <div class="absolute top-8 w-[85%] rounded-lg bg-slate-100 p-8 sm:p-12 lg:px-32 2xl:mx-96 2xl:px-12 2xl:w-[40%]">
+            <form id="form">
+                <div class="relative z-10 w-full mb-5">
+                    <input
+                        id="importe"
+                        type="text"
+                        name="importe"
+                        placeholder=""
+                        required
+                        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    />
+                    <label for="name" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Importe de la hipoteca</label>
+                    <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <div class="relative z-10 w-full mb-5">
+                    <input
+                        id="interes"
+                        type="text"
+                        name="interes"
+                        placeholder=" "
+                        class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                    />
+                    <label for="email" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Interés (%)</label>
+                    <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <div class="relative z-10 w-full mb-5">
+                <input
+                    id="plazo"
+                    type="text"
+                    name="plazo"
+                    placeholder=" "
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                />
+                <label for="password" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Plazo amortización (años)</label>
+                <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <span class="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
+                </fieldset>
+        
+                <div class="relative z-10 w-full mb-5">
+                <select
+                    name="select"
+                    value=""
+                    onclick="this.setAttribute('value', this.value);"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+                >
+                    <option value="" selected disabled hidden></option>
+                    <option value="1">Mensual</option>
+                    <option value="2">Trimestral</option>
+                    <option value="3">Cuatrimestral</option>
+                    <option value="4">Semestral</option>
+                    <option value="5">Anual</option>
+                </select>
+                <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecciona un periodo de pago</label>
+                <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
+                </div>
+        
+                <button
+                    id="simulationBttn"
+                    type="button"
+                    class="w-full px-6 py-3 mt-3 text-lg text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-indigo-800 hover:bg-pink-600 hover:shadow-lg focus:outline-none"
+                >
+                Calcular
+                </button>
+            </form>
+        </div>
+    </section> -->
+
+    <!-- SIMULATION LIST CONTAINER -->
+    <section id ="simulationContainer" class="relative flex flex-col justify-between items-center">
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="simulation" class="bg-slate-100 w-[40%] py-2 px-6 mb-8 flex flex-row justify-between items-center rounded-lg shadow-xl hover:bg-slate-300 cursor-pointer transition ease-out duration-150">
+
+            <div class="relative w-10 h-full mr-4 mt-4 border-r-2 border-y-slate-900">
+                <svg class="w-6 h-6" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <div>
+                <!-- CAPITAL INICIAL -->
+                <p class="mb-4 text-sm text-justify tracking-wide mt-4">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+                </p>
+
+                <!-- INTERÉS -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+                </p>
+
+            </div>
+            <div class="pt-4">
+                <!-- PLAZO -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+                </p>
+
+                <!-- MODALIDAD -->
+                <p class="mb-4 text-sm  text-justify tracking-wide">
+                    <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CALCULATION RESULT -->
+    <section class="relative h-fit mt-[120%] ml-8 md:mt-[65%] md:px-20 lg:px-32 lg:ml-0 lg:mt-[58%] 2xl:mt-[5%] 2xl:bg-slate-50 2xl:py-6 2xl:px-80">
+        <h2 class="text-2xl mb-4">Resumen de la hipoteca seleccionada</h2>
+        <p class="text-base tracking-wide text-indigo-800 font-bold mb-2">CARACTERÍSTICAS</p>
+
+        <!-- CAPITAL INICIAL -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+        </p>
+
+        <!-- INTERÉS -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
+        </p>
+
+        <!-- PLAZO -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
+          </p>
+
+          <!-- MODALIDAD -->
+        <p class="mb-4 text-justify tracking-wide">
+            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+        </p>
+
+        <!-- TABLE -->
+        <table class="table-auto mb-4 md:w-full">
+            <thead>
+                <tr class="text-sm border border-l-slate-900 py-1">
+                    <th class="border">Pagos</th>
+                    <th class="border">Principal</th>
+                    <th class="border">Cuota</th>
+                    <th class="border">T.Intereses</th>
+                    <th class="border">T.Pagos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">360</td>
+                    <td class="border">270.000 €</td>
+                    <td class="border">997,97 €</td>
+                    <td class="border">89.270,12 €</td>
+                    <td class="border">359.270.12 €</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="showAllTable" class="w-[95%] py-2 px-6 text-sm text-center text-slate-100 rounded-lg bg-indigo-800 mb-4 md:w-full">
+            Ver cuadro de amortización
+        </div>
+
+        <!-- TABLA CUADRO AMORTIZACIÓN -->
+        <table class="table-auto mb-4 md:w-full">
+            <thead>
+                <tr class="text-sm border border-l-slate-900 py-1">
+                    <th class="border">Pago</th>
+                    <th class="border">C.Pendiente</th>
+                    <th class="border">C.Amortizado</th>
+                    <th class="border">Intereses</th>
+                    <th class="border">Cuota</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">1</td>
+                    <td class="border">270.000 €</td>
+                    <td class="border">547,97 €</td>
+                    <td class="border">450 €</td>
+                    <td class="border">997,97 €</td>
+                </tr>
+                <tr class="text-sm border border-l-slate-900">
+                    <td class="border">2</td>
+                    <td class="border">269.452,02 €</td>
+                    <td class="border">548,88 €</td>
+                    <td class="border">449.08 €</td>
+                    <td class="border">997,97 €</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section class="relative w-full xs:pt-16 xs:px-8 md:px-20 lg:px-32 2xl:px-80">
+      <div>
+        <h3 class="text-xl text-indigo-800 font-semibold tracking-wide mb-4">CONCEPTOS CLAVE</h3>
+        <p class="text-base text-justify tracking-wide mb-4">
+          Para la simulación de una hipoteca necesitamos definir el <strong>capital</strong> a financiar, el tipo de <strong>interés</strong>, el <strong>plazo</strong> de amortización o devolución de la hipoteca y su <strong>frecuencia</strong> de pago, número de veces que pagaremos la cuota en un año.
+        </p>
+
+        <h3 class="text-xl text-indigo-800 font-semibold tracking-wide mb-4">VARIABLES DE CÁLCULO</h3>
+        <!-- CAPITAL INICIAL -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Capital de la hipoteca:</strong> <br> Cuantía de la financiación que se va a solicitar.
+        </p>
+
+        <!-- INTERÉS -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Tipo de interés:</strong> <br> Si se trata de un tipo de interés fijo, no varía durante toda la hipoteca, por el contrario si es un tipo de interés variable, como su nombre indica, utiliza un promedio para asignar un porcentaje variable, normalmente de un 1%.
+        </p>
+
+        <!-- PLAZO -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Plazo de amortización:</strong> <br> Número de años en los que tienes previsto devolver la hipoteca. Introduce una fecha aproximada que cumpla con tus necesidades.
+        </p>
+
+        <!-- FREQUENCIA -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Frequencia de pago de la cuota:</strong> <br> Determina el periodo, número de veces al cabo de un año, con la que se pagará la cuota del préstamo.
+        </p>
+
+        <!-- CUADRO AMORTIZACIÓN -->
+        <h3 class="text-xl text-indigo-800 font-semibold tracking-wide mb-4">CUADRO DE AMORTIZACIÓN</h3>
+        <p class="text-base text-justify tracking-wide mb-4">
+          El cuadro de amortización de la hipoteca permite ver como evolucionan los componentes de la cuota, capital amortizado e intereses a lo largo de la vida de la hipoteca, informándonos además del capital pendiente del préstamo hipotecario en cada momento.
+        </p>
+
+        <!-- PAGO -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Pagos:</strong> <br> Indica el número de pagos totales.
+        </p>
+
+        <!-- CAPITAL PENDIENTE -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Capital pendiente:</strong> <br> Se trata del capital pendiente al inicio del período de pago y sobre el que se calcularán los intereses devengados y liquidadeos en dicho período.
+        </p>
+
+        <!-- CAPITAL AMORTIZADO -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Capital amortizado:</strong> <br> Se trata de la parte de capital que se amortizará en ese período.
+        </p>
+        
+        <!-- INTERESES -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Intereses:</strong> <br> Importe de los intereses devengados por el paital pendiente en dicho periodo.
+        </p>
+
+        <!-- CUOTAS -->
+        <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Cuota:</strong> <br> Importe del pago realizado en dicho período. Es importante recordar que el importe de la cuota se corresponde con la suma del paital amortizado en idcho periodo más los intereses devengados por el capital al inicio del mismo.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full h-10 py-10 border-t z-40 bg-slate-900 text-sm text-slate-100 flex flex-col justify-center items-center">
+    <p>Heber M.Rodríguez Cabrera - Rafael Pérez Tercero</p>
+    <p>	&#169; 2023</p>
+  </footer>
+  <script src="./index.js" type="module"></script>
+</body>
+</html>

@@ -28,7 +28,7 @@ function login() {
    
     sxmlhttp.open("POST", "http://127.0.0.1:8080/Hipotecas/Login", true);
     sxmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    sxmlhttp.send("password="+password+"&&username="+user);
+    sxmlhttp.send("password="+"passs"+"&&username="+"user");
 }
 window.onload = function() {
     
