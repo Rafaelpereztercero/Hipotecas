@@ -4,6 +4,26 @@ o Un documento con capturas de pantalla de la configuración del
 servidor tomcado y el despliegue de la aplicación (en el
 README).
 
+He utilizado Eclipse, un entorno de desarrollo integrado, y Tomcat 9 (compatible con tomcat 10), un servidor web, para desarrollar y ejecutar mi aplicación web en Java. Eclipse me permitió escribir y depurar mi código, mientras que Tomcat alojó mi aplicación para que pudiera probarla y depurarla localmente
+
+![image](https://user-images.githubusercontent.com/91564342/223089888-95b11b48-35c1-4518-bb65-e091c33feec8.png)
+
+He configurado Tomcat de la siguiente forma
+
+ - admin port : 8005
+ - http  port  : 8080
+ 
+ ![image](https://user-images.githubusercontent.com/91564342/223090775-d6f72fbb-885c-40ac-9d5d-a430caa949a2.png)
+
+Las dependencias del tomcat estan presentes en la carpeta tomcat por si se ocasiona algun problema 
+
+![image](https://user-images.githubusercontent.com/91564342/223091230-a3859940-dbf8-4547-9fe1-cf1b55ff16a6.png)
+
+Hemos empleado tailwind para estilizar nuestra web de una forma más eficiente, si no cargan los estilos, es necesario utilizar el siguiente comando en el directorio raiz del proyecto
+
+<code>npx tailwindcss -i ./Front/src/style.css -o ./Front/dist/style.css --watch</code>
+
+
 o Una WAR con el código fuente de la aplicación. Debe ser
 compilable con un Tomcat 10.1
 
@@ -14,10 +34,10 @@ usuario con el que conecta la aplicación a la base de datos.
 
 ## **El archivo de carga se encuentra dentro de la carpeta "SQL"**
 
+
 BONUS (2P)
 
 • El servidor tomcat está configurado con SSL.
-
 
 
 ¿Cómo se calcula la cuota mensual?
