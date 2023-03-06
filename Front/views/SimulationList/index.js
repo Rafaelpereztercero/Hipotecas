@@ -128,9 +128,9 @@ window.onload = async function () {
           document.getElementById("info").classList.remove("hidden");
         }
         if (
-          document.getElementById("concepts").classList.contains("mt-[30rem]")
+          document.getElementById("concepts").classList.contains("mt-[40rem]")
         ) {
-          document.getElementById("concepts").classList.remove("mt-[30rem]");
+          document.getElementById("concepts").classList.remove("mt-[40rem]");
         }
         let monto = document.getElementById("i" + i).innerHTML;
         let tasaInteres = document.getElementById("f" + i).innerHTML;
