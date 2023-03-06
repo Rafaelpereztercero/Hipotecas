@@ -41,7 +41,6 @@ public class DbFunctions {
 	 */
 	public static ResultSet Select(String query, Object[] params) throws SQLException {
 
-		System.out.print(url);
 		DbConnection dbInfo = new DbConnection(url, username, password);
 
 		// CONECTION TO SQL
@@ -140,7 +139,6 @@ public class DbFunctions {
 
 		if (params != null) {
 			for (int x = 0; x < params.length; x++) {
-				System.out.println(params[x]);
 				st.setObject(x + 1, params[x]);
 			}
 		}

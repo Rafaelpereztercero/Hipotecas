@@ -107,7 +107,7 @@
             <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Inicio</a>
+            <a href="../../src/index.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Inicio</a>
           </li>
 
           <!-- SIMULADOR -->
@@ -115,7 +115,7 @@
             <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <a href="../views/Simulator/simulation.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Simulador de Hipoteca</a>
+            <a href="../Simulator/simulation.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Simulador de Hipoteca</a>
           </li>
 
           <!-- VER MIS SIMULACIONES -->
@@ -123,7 +123,7 @@
             <svg class="w-6 h-6 text-indigo-800" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <a href="#" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Ver mis simulaciones</a>
+            <a href="../SimulationList/index.html" class="ml-2 hover:text-indigo-800 transition ease-in duration-150 active:text-indigo-800">Ver mis simulaciones</a>
           </li>
 
           <!-- INFORMACIÓN -->
@@ -184,7 +184,7 @@
                     placeholder=" "
                     class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                 />
-                <label for="password" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Plazo amortización (años)</label>
+                <label for="password" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Plazo amortización (meses)</label>
                 <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
                 </div>
         
@@ -200,10 +200,7 @@
                 >
                     <option value="" selected disabled hidden></option>
                     <option value="1">Mensual</option>
-                    <option value="2">Trimestral</option>
-                    <option value="3">Cuatrimestral</option>
-                    <option value="4">Semestral</option>
-                    <option value="5">Anual</option>
+                    
                 </select>
                 <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">Selecciona un periodo de pago</label>
                 <span class="text-sm text-red-600 hidden" id="error">El campo no puede estar vacío</span>
@@ -221,96 +218,72 @@
     </section>
 
     <!-- CALCULATION RESULT -->
-    <section class="relative h-fit mt-[120%] ml-8 md:mt-[65%] md:px-20 lg:px-32 lg:ml-0 lg:mt-[58%] 2xl:mt-[35%] 2xl:bg-slate-50 2xl:py-6 2xl:px-80">
-        <h2 class="text-2xl mb-4">Resumen de la hipoteca</h2>
-        <p class="text-base tracking-wide text-indigo-800 font-bold mb-2">CARACTERÍSTICAS</p>
+    <section id="info" class="relative h-fit mt-[120%] ml-8 md:mt-[65%] md:px-20 lg:px-32 lg:ml-0 lg:mt-[58%] 2xl:mt-[35%] 2xl:bg-slate-50 2xl:py-6 2xl:px-80">
+      <h2 class="text-2xl mb-4">Resumen de la hipoteca seleccionada</h2>
+      <p class="text-base tracking-wide text-indigo-800 font-bold mb-2">CARACTERÍSTICAS</p>
 
-        <!-- CAPITAL INICIAL -->
-        <p class="mb-4 text-justify tracking-wide">
-            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-            <strong>Capital de la hipoteca:</strong> <span class="text-indigo-800">270000 €</span>
+      <!-- CAPITAL INICIAL -->
+      <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Capital de la hipoteca:</strong> <span id="cap" class="text-indigo-800">270000 €</span>
+      </p>
+
+      <!-- INTERÉS -->
+      <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Interés:</strong> <span id="int" class="text-indigo-800">2 %</span>
+      </p>
+
+      <!-- PLAZO -->
+      <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <strong>Plazo de amortización:</strong>  <span id="dur" class="text-indigo-800">30 años</span>
         </p>
 
-        <!-- INTERÉS -->
-        <p class="mb-4 text-justify tracking-wide">
-            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+        <!-- MODALIDAD -->
+      <p class="mb-4 text-justify tracking-wide">
+          <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <strong>Interés:</strong> <span class="text-indigo-800">2 %</span>
-        </p>
+          <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
+      </p>
 
-        <!-- PLAZO -->
-        <p class="mb-4 text-justify tracking-wide">
-            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-            <strong>Plazo de amortización:</strong>  <span class="text-indigo-800">30 años</span>
-          </p>
+      <!-- TABLE -->
+      <table class="table-auto mb-4 md:w-full">
+          <thead>
+              <tr class="text-sm border border-l-slate-900 py-1">
+                  <th class="border">Pagos</th>
+                  <th class="border">Principal</th>
+                  <th class="border">Cuota</th>
+                  <th class="border">T.Intereses</th>
+                  <th class="border">T.Pagos</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="text-sm border border-l-slate-900">
+                  <td id="td" class="border">360</td>
+                  <td id="ta" class="border">270.000 €</td>
+                  <td id="co" class="border">997,97 €</td>
+                  <td id="ti" class="border">89.270,12 €</td>
+                  <td id="tp" class="border">359.270.12 €</td>
+              </tr>
+          </tbody>
+      </table>
 
-          <!-- MODALIDAD -->
-        <p class="mb-4 text-justify tracking-wide">
-            <svg class="w-6 h-6 inline-block" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889m-8.25.75l.213.09a1.687 1.687 0 002.062-.617l4.45-6.676a1.688 1.688 0 012.062-.618l.213.09" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg>
-            <strong>Modalidad de cálculo:</strong> <br> <span class="text-indigo-800">Sistema Francés, cuota constante</span>
-        </p>
+      <div id="showAllTable" class="w-[95%] cursor-pointer py-2 px-6 text-sm text-center text-slate-100 rounded-lg bg-indigo-800 mb-4 md:w-full">
+          Ver cuadro de amortización
+      </div>
 
-        <!-- TABLE -->
-        <table class="table-auto mb-4 md:w-full">
-            <thead>
-                <tr class="text-sm border border-l-slate-900 py-1">
-                    <th class="border">Pagos</th>
-                    <th class="border">Principal</th>
-                    <th class="border">Cuota</th>
-                    <th class="border">T.Intereses</th>
-                    <th class="border">T.Pagos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-sm border border-l-slate-900">
-                    <td class="border">360</td>
-                    <td class="border">270.000 €</td>
-                    <td class="border">997,97 €</td>
-                    <td class="border">89.270,12 €</td>
-                    <td class="border">359.270.12 €</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div id="showAllTable" class="w-[95%] py-2 px-6 text-sm text-center text-slate-100 rounded-lg bg-indigo-800 mb-4 md:w-full">
-            Ver cuadro de amortización
-        </div>
-
-        <!-- TABLA CUADRO AMORTIZACIÓN -->
-        <table class="table-auto mb-4 md:w-full">
-            <thead>
-                <tr class="text-sm border border-l-slate-900 py-1">
-                    <th class="border">Pago</th>
-                    <th class="border">C.Pendiente</th>
-                    <th class="border">C.Amortizado</th>
-                    <th class="border">Intereses</th>
-                    <th class="border">Cuota</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-sm border border-l-slate-900">
-                    <td class="border">1</td>
-                    <td class="border">270.000 €</td>
-                    <td class="border">547,97 €</td>
-                    <td class="border">450 €</td>
-                    <td class="border">997,97 €</td>
-                </tr>
-                <tr class="text-sm border border-l-slate-900">
-                    <td class="border">2</td>
-                    <td class="border">269.452,02 €</td>
-                    <td class="border">548,88 €</td>
-                    <td class="border">449.08 €</td>
-                    <td class="border">997,97 €</td>
-                </tr>
-            </tbody>
-        </table>
+      <!-- TABLA CUADRO AMORTIZACIÓN -->
+      <table id="show" class="table-auto mb-4 md:w-full">
+          
+      </table>
     </section>
 
     <!-- INFO SECTION -->
